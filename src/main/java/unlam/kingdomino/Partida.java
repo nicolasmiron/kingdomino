@@ -1,28 +1,56 @@
 package main.java.unlam.kingdomino;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 
 public class Partida {
 	private List<Ficha> mazo;
-	private Set<Jugador> jugadores;
+	private List<Jugador> jugadores;
 	
-	public Partida(Set<Jugador> jugadores) {
-		this.jugadores = jugadores;
-		this.mazo = this.generarMazo();
+	public Partida() {
+		this.mazo = new ArrayList<>();
+		this.jugadores = new ArrayList<>();
+	}
+	
+	public void iniciarPartida() {
+		if(cantJugadoresOk()) {
+			setUpPartida();
+			while(!mazo.isEmpty()) {
+				Ronda.nuevaRonda(jugadores, getFichasParaTurno());
+			}
+			this.finalizarPartida();
+		}
+	}
+	
+	private void setUpPartida() {
+		this.desordenarJugadores();
+		this.generarMazo();
+		List<Ficha> fichasSetUp = getFichasSetUp();
+		for (Jugador jugador : jugadores) {
+			jugador.elegirFicha(fichasSetUp, 0);
+		}
 	}
 
-	public void iniciar() {
-		this.setUpPartida();
-		while(!mazo.isEmpty()) {
-			Ronda.nuevaRonda(jugadores, getFichasParaTurno());
-		}
-		finalizarPartida();
+	private boolean cantJugadoresOk() {
+		return jugadores.size() >= 2 && jugadores.size() <= 4;
 	}
-	
+
+	public void agregarJugador(Jugador jugador) {
+		if(jugadores.size() < 4) {
+			jugadores.add(jugador);
+		}
+	}
+
 	private void finalizarPartida() {
+		this.calcularGanador();
+	}
+
+	private Jugador calcularGanador() {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 
 	private List<Ficha> getFichasParaTurno() {
@@ -30,13 +58,21 @@ public class Partida {
 		return null;
 	}
 
-	private void setUpPartida() {
-		// TODO Auto-generated method stub
-		
+	private List<Ficha> getFichasSetUp() {
+		List<Ficha> fichasSetUp = new ArrayList<>();
+		for(int i = 0; i < jugadores.size(); i++) {
+			fichasSetUp.add(mazo.remove(new Random().nextInt(mazo.size())));
+		}
+		return fichasSetUp;
 	}
 
-	private List<Ficha> generarMazo() {
-		// TODO Auto-generated method stub
-		return null;
+	private void desordenarJugadores() {
+		Collections.shuffle(jugadores);
+	}
+
+	private void generarMazo() {
+		for(int i = 0; i < jugadores.size() * 12; i++) {
+			mazo.add(new Ficha());
+		}
 	}
 }

@@ -5,9 +5,10 @@ import java.util.Set;
 
 public class Ronda {
 
-	public static void nuevaRonda(Set<Jugador> jugadores, List<Ficha> fichasParaTurno) {
-		// TODO Auto-generated method stub
-		
+	public static void nuevaRonda(List<Jugador> jugadores, List<Ficha> fichasParaTurno) {
+		for (Ficha ficha : fichasParaTurno) {
+			
+		}
 	}
 
 }
