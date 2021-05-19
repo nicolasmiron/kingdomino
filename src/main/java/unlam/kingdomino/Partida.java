@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
+import java.util.Scanner;
 
 public class Partida {
 	private List<Ficha> mazo;
@@ -19,18 +19,20 @@ public class Partida {
 		if(cantJugadoresOk()) {
 			setUpPartida();
 			while(!mazo.isEmpty()) {
-				Ronda.nuevaRonda(jugadores, getFichasParaTurno());
+				Ronda.nuevaRonda(jugadores, getFichas());
 			}
-			this.finalizarPartida();
-		}
+			finalizarPartida();
+		}	
 	}
 	
 	private void setUpPartida() {
 		this.desordenarJugadores();
 		this.generarMazo();
-		List<Ficha> fichasSetUp = getFichasSetUp();
+		List<Ficha> fichasSetUp = getFichas();
 		for (Jugador jugador : jugadores) {
-			jugador.elegirFicha(fichasSetUp, 0);
+			Scanner scanner = new Scanner(System.in);
+			int nro = scanner.nextInt();
+			jugador.elegirFicha(fichasSetUp, nro);
 		}
 	}
 
@@ -53,17 +55,15 @@ public class Partida {
 		return null;
 	}
 
-	private List<Ficha> getFichasParaTurno() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	private List<Ficha> getFichasSetUp() {
-		List<Ficha> fichasSetUp = new ArrayList<>();
+	private List<Ficha> getFichas() {
+		List<Ficha> fichas = new ArrayList<>();
 		for(int i = 0; i < jugadores.size(); i++) {
-			fichasSetUp.add(mazo.remove(new Random().nextInt(mazo.size())));
+			fichas.add(mazo.remove(new Random().nextInt(mazo.size())));
 		}
-		return fichasSetUp;
+		Collections.sort(fichas, (f1, f2) -> {
+			return f1.getNro().compareTo(f2.getNro());
+		});
+		return fichas;
 	}
 
 	private void desordenarJugadores() {
@@ -72,7 +72,7 @@ public class Partida {
 
 	private void generarMazo() {
 		for(int i = 0; i < jugadores.size() * 12; i++) {
-			mazo.add(new Ficha());
+			mazo.add(new Ficha(i));
 		}
 	}
 }
