@@ -8,7 +8,7 @@ import java.util.Random;
 public class Partida {
 	private List<Ficha> mazo;
 	private List<Jugador> jugadores;
-	private boolean primerTurno = true;
+	private boolean primerRonda = true;
 	
 	public Partida() {
 		this.mazo = new ArrayList<>();
@@ -28,24 +28,14 @@ public class Partida {
 	}
 	
 	private void ordenarJugadores() {
-		if(primerTurno) {
+		if(primerRonda) {
 			Collections.shuffle(jugadores);
-			primerTurno = false;
+			primerRonda = false;
 		} else {
 			Collections.sort(jugadores, (j1, j2) -> {
 				return j1.getFichaActual().getNro().compareTo(j2.getFichaActual().getNro());
 			});			
 		}
-	}
-
-	private void setUpPartida() {
-//		List<Ficha> fichasSetUp = getFichas();
-//		for (Jugador jugador : jugadores) {
-//			System.out.println("Elegir un nro de ficha: ");
-//			Scanner scanner = new Scanner(System.in);
-//			int nro = scanner.nextInt();
-//			jugador.elegirFicha(fichasSetUp, nro - 1);
-//		}
 	}
 
 	private boolean cantJugadoresOk() {
