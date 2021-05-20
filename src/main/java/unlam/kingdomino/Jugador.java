@@ -14,7 +14,7 @@ public class Jugador {
 		return fichaActual;
 	}
 
-	public void colocarFichaEnTablero() {
+	public void colocarFichaPreviaEnTablero() {
 		
 	}
 

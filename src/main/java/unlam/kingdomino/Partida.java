@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
-import java.util.Scanner;
 
 public class Partida {
 	private List<Ficha> mazo;
 	private List<Jugador> jugadores;
+	private boolean primerTurno = true;
 	
 	public Partida() {
 		this.mazo = new ArrayList<>();
@@ -17,23 +17,35 @@ public class Partida {
 	
 	public void iniciarPartida() {
 		if(cantJugadoresOk()) {
-			setUpPartida();
+			generarMazo();
 			while(!mazo.isEmpty()) {
+				ordenarJugadores();
 				Ronda.nuevaRonda(jugadores, getFichas());
 			}
 			finalizarPartida();
-		}	
+		} else
+			System.out.println("Cantidad de jugadores no valida.");
 	}
 	
-	private void setUpPartida() {
-		this.desordenarJugadores();
-		this.generarMazo();
-		List<Ficha> fichasSetUp = getFichas();
-		for (Jugador jugador : jugadores) {
-			Scanner scanner = new Scanner(System.in);
-			int nro = scanner.nextInt();
-			jugador.elegirFicha(fichasSetUp, nro);
+	private void ordenarJugadores() {
+		if(primerTurno) {
+			Collections.shuffle(jugadores);
+			primerTurno = false;
+		} else {
+			Collections.sort(jugadores, (j1, j2) -> {
+				return j1.getFichaActual().getNro().compareTo(j2.getFichaActual().getNro());
+			});			
 		}
+	}
+
+	private void setUpPartida() {
+//		List<Ficha> fichasSetUp = getFichas();
+//		for (Jugador jugador : jugadores) {
+//			System.out.println("Elegir un nro de ficha: ");
+//			Scanner scanner = new Scanner(System.in);
+//			int nro = scanner.nextInt();
+//			jugador.elegirFicha(fichasSetUp, nro - 1);
+//		}
 	}
 
 	private boolean cantJugadoresOk() {
@@ -64,10 +76,6 @@ public class Partida {
 			return f1.getNro().compareTo(f2.getNro());
 		});
 		return fichas;
-	}
-
-	private void desordenarJugadores() {
-		Collections.shuffle(jugadores);
 	}
 
 	private void generarMazo() {
