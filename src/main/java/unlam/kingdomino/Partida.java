@@ -11,7 +11,6 @@ public class Partida {
 	private boolean primerRonda = true;
 	
 	public Partida() {
-		this.mazo = new ArrayList<>();
 		this.jugadores = new ArrayList<>();
 	}
 	
@@ -20,14 +19,14 @@ public class Partida {
 			generarMazo();
 			while(!mazo.isEmpty()) {
 				ordenarJugadores();
-				Ronda.nuevaRonda(jugadores, getFichas());
+				Ronda.nuevaRonda(jugadores, getFichasParaTurno());
 			}
 			finalizarPartida();
 		} else
 			System.out.println("Cantidad de jugadores no valida.");
 	}
 	
-	private void ordenarJugadores() {
+	public void ordenarJugadores() {
 		if(primerRonda) {
 			Collections.shuffle(jugadores);
 			primerRonda = false;
@@ -38,7 +37,7 @@ public class Partida {
 		}
 	}
 
-	private boolean cantJugadoresOk() {
+	public boolean cantJugadoresOk() {
 		return jugadores.size() >= 2 && jugadores.size() <= 4;
 	}
 
@@ -57,7 +56,7 @@ public class Partida {
 		return null;
 	}
 
-	private List<Ficha> getFichas() {
+	public List<Ficha> getFichasParaTurno() {
 		List<Ficha> fichas = new ArrayList<>();
 		for(int i = 0; i < jugadores.size(); i++) {
 			fichas.add(mazo.remove(new Random().nextInt(mazo.size())));
@@ -68,9 +67,26 @@ public class Partida {
 		return fichas;
 	}
 
-	private void generarMazo() {
+	public void generarMazo() {
+		this.mazo = new ArrayList<>();
 		for(int i = 0; i < jugadores.size() * 12; i++) {
 			mazo.add(new Ficha(i));
 		}
+	}
+
+	public String getJugadores() {
+		return this.jugadores.toString();
+	}
+	
+	public void setPrimeraRonda(boolean primeraRonda) {
+		this.primerRonda = primeraRonda;
+	}
+	
+	public List<Ficha> getMazo() {
+		return this.mazo;
+	}
+	
+	public void setMazo() {
+		
 	}
 }

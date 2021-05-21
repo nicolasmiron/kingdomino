@@ -9,7 +9,8 @@ public enum Bioma {
 	BOSQUE,
 	MONTAÑA,
 	LAGO,
-	TRIGAL;
+	TRIGAL,
+	CASTILLO;
 	
 	private int cantCoronas;
 	
@@ -21,7 +22,11 @@ public enum Bioma {
 		    Collections.unmodifiableList(Arrays.asList(values()));
 	
 	public static Bioma randomBioma() {
-		return VALUES.get(new Random().nextInt(VALUES.size()));
+		Bioma rand;
+		do {
+			rand  = VALUES.get(new Random().nextInt(VALUES.size()));
+		} while(rand == Bioma.CASTILLO);
+		return rand;
 	}
 
 	public int getCantCoronas() {

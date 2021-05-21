@@ -7,8 +7,9 @@ public class Ronda {
 	
 	public static void nuevaRonda(List<Jugador> jugadores, List<Ficha> fichas) {
 		for (Jugador jugador : jugadores) {
-			if(jugador.getFichaActual() != null) {				
-				jugador.colocarFichaPreviaEnTablero();
+			if(jugador.getFichaActual() != null) {
+				// input 
+				// jugador.colocarFichaPreviaEnTablero(jugador.getFichaActual(), posBiomaIzq, posBiomaDer);
 			}
 			int nro = inputJugador();
 			jugador.elegirFicha(fichas, nro - 1);
