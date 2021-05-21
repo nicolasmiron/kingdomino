@@ -4,6 +4,8 @@ public class Posicion {
 	private int x;
 	private int y;
 	
+	public Posicion() {};
+	
 	public Posicion(int x, int y) {
 		this.setX(x);
 		this.setY(y);
@@ -23,5 +25,10 @@ public class Posicion {
 
 	public void setY(int y) {
 		this.y = y;
+	}
+	
+	@Override
+	public String toString() {
+		return "X: " + getX() + ", Y: " + getY(); 
 	}
 }

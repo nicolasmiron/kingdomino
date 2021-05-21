@@ -2,6 +2,7 @@ package test;
 
 import static org.junit.Assert.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Test;
@@ -10,6 +11,7 @@ import main.java.unlam.kingdomino.Ficha;
 import main.java.unlam.kingdomino.Jugador;
 import main.java.unlam.kingdomino.Partida;
 import main.java.unlam.kingdomino.Posicion;
+import main.java.unlam.kingdomino.Ronda;
 
 public class Testkingdomino {
 
@@ -151,4 +153,35 @@ public class Testkingdomino {
 	        j1.colocarFichaPreviaEnTablero(j1.getFichaActual(), new Posicion(4,3), new Posicion(3, 3));
 	        System.out.println(" ");
 	    }
+	    
+	    @Test
+	    public void inputJugador() {
+	        Partida p1 = new Partida();
+	        Jugador j1 = new Jugador("Nico");
+	        Jugador j2 = new Jugador("Fede");
+	        p1.agregarJugador(j1);
+	        p1.agregarJugador(j2);
+
+	        p1.generarMazo();
+	        
+	        int n = Ronda.inputJugador();
+	        System.out.println(n);
+	    }
+	    
+	    @Test
+	    public void inputJugadorPosFichas() {
+	        Partida p1 = new Partida();
+	        Jugador j1 = new Jugador("Nico");
+	        Jugador j2 = new Jugador("Fede");
+	        p1.agregarJugador(j1);
+	        p1.agregarJugador(j2);
+
+	        p1.generarMazo();
+			Posicion posBiomaDer = new Posicion();
+			Posicion posBiomaIzq = new Posicion();
+	        Ronda.inputJugadorPosFicha(Arrays.asList(posBiomaIzq, posBiomaDer));
+	        System.out.println(Arrays.asList(posBiomaIzq, posBiomaDer));
+	    }
 }
+
+

@@ -10,8 +10,17 @@ public class Tablero {
 	}
 	
 	public void colocarFicha(Ficha ficha, Posicion posBiomaIzq, Posicion posBiomaDer) {
-		tablero[posBiomaIzq.getX()][posBiomaIzq.getY()] = ficha.getBiomaIzq();
-		tablero[posBiomaDer.getX()][posBiomaDer.getY()] = ficha.getBiomaDer();
+		if(posicionValida(ficha, posBiomaIzq, posBiomaDer)) {			
+			tablero[posBiomaIzq.getX()][posBiomaIzq.getY()] = ficha.getBiomaIzq();
+			tablero[posBiomaDer.getX()][posBiomaDer.getY()] = ficha.getBiomaDer();
+		}
 	}
 
+	private boolean posicionValida(Ficha ficha, Posicion posBiomaIzq, Posicion posBiomaDer) {
+		return false;
+	}
+	
+	public int getPuntuacion() {
+		return 0;
+	}
 }
