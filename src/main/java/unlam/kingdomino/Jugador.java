@@ -29,8 +29,8 @@ public class Jugador {
 		return apodo;
 	}
 
-	public void mostrarTablero() {
-		tablero.mostrarTablero();
+	public void mostrarTablero(Jugador Jugador) {
+		Jugador.tablero.mostrarTablero();
 	}
 
 }
