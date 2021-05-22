@@ -150,7 +150,10 @@ public class Testkingdomino {
 	        
 	        List<Ficha> fichas = p1.getFichasParaTurno();
 	        j1.elegirFicha(fichas, 1);
-	        j1.colocarFichaPreviaEnTablero(j1.getFichaActual(), new Posicion(4,3), new Posicion(3, 3));
+	        j1.colocarFichaPreviaEnTablero(j1.getFichaActual(), new Posicion(5,4), new Posicion(6, 4));
+	        j1.colocarFichaPreviaEnTablero(j1.getFichaActual(), new Posicion(6,5), new Posicion(5, 5));
+	        
+	        j1.mostrarTablero();
 	        System.out.println(" ");
 	    }
 	    

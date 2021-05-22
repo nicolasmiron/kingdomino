@@ -34,5 +34,5 @@ public class Ronda {
 	public static int inputJugador() {
 		System.out.println("Elegir un nro de ficha: ");
 		return new Scanner(System.in).nextInt();
-	}	
+	}
 }

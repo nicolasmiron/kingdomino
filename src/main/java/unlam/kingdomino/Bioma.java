@@ -33,4 +33,9 @@ public enum Bioma {
 		return cantCoronas;
 	}
 	
+	@Override
+	public String toString() {
+		return this.name();
+	}
+	
 }
