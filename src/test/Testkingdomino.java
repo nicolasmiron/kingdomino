@@ -32,10 +32,7 @@ public class Testkingdomino {
 	    @Test
 	    public void NoIniciarPartida() {
 	        Partida p1 = new Partida();
-	        Jugador j1 = new Jugador("Nico");
-	        Jugador j2 = new Jugador("Fede");
 	        Jugador j3 = new Jugador("Tomi");
-	        Jugador j4 = new Jugador("Joel");
 	        p1.agregarJugador(j3);
 	        assertEquals(false, p1.cantJugadoresOk());
 	    }
@@ -43,10 +40,8 @@ public class Testkingdomino {
 	    @Test
 	    public void NoIniciarPartida2() {
 	        Partida p1 = new Partida();
-	        Jugador j1 = new Jugador("Nico");
 	        Jugador j2 = new Jugador("Fede");
 	        Jugador j3 = new Jugador("Tomi");
-	        Jugador j4 = new Jugador("Joel");
 	        p1.agregarJugador(j3);
 	        p1.agregarJugador(j2);
 	        assertEquals(true, p1.cantJugadoresOk());
